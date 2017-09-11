@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     .finally(() => { this.isLoading = false; })
     .subscribe((command: any) => {
       this.command = command;
-      this.setmessageList(command);
+      // this.setmessageList(command);
       this.isLoading = true;
 
       if (this.command.payload.command === 'request_link') {
@@ -49,6 +49,10 @@ export class HomeComponent implements OnInit {
           this.setmessageList(element);
         });
       }
+
+      if (this.command.payload.command === 'request_command') {
+        this.getCommand();
+      }
      });
   }
 
@@ -57,9 +61,9 @@ export class HomeComponent implements OnInit {
       this.messageList.push(_item.warnings);
     }
     if (_item.errors.length !== 0) {
-      this.messageList.push(_item.warnings);
+      this.messageList.push(_item.errors);
     }
-    if (_item.payload.command) {
+    if (_item.warnings.length === 0 && _item.errors.length === 0) {
       this.messageList.push([{code: 'HAPPY_REQUEST', details: ''}]);
     }
   }
