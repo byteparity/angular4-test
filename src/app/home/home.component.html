@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+    <h1>
+      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
+      <span translate>Hello world !</span>
+    </h1>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+        <div class="card">
+          <h3 class="card-header" translate>Action</h3>
+          <div class="card-block">
+            <h4 class="card-title" translate>Command</h4>
+            <p class="card-text">
+                <code *ngIf="command?.payload">{{command.payload.command | json}}</code>
+            </p>
+            <app-loader [isLoading]="isLoading"></app-loader>
+            <button [disabled]="isLoading" class="btn btn-lg btn-outline-primary" (click)="getCommand()" translate>Go</button>
+            <button class="btn btn-lg btn-outline-primary" (click)="clearData()" translate>Clear</button>
+          </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+          <h3 class="card-header" translate>Executor</h3>
+          <div class="card-block">
+            <h4 class="card-title" translate>State area</h4>
+            <p class="card-text">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+          </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+          <h3 class="card-header" translate>StatusReflector</h3>
+          <div class="card-block">
+            <h4 class="card-title" translate>Status</h4>
+            <div *ngIf="messageList?.length > 0">
+                <div class="alert alert-success" role="alert" *ngFor="let message of messageList">
+                    <strong translate>{{message[0].code}}</strong>, <span>{{message[0].details}}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
