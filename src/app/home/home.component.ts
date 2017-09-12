@@ -18,9 +18,15 @@ export class HomeComponent implements OnInit {
   elementIdList: Array<any> = [];
   linkItemList: Array<any> = [];
 
-  constructor(private mainServiceService: MainServiceService) {}
+  // Automate test
+  // public intervalId = setInterval(() => {
+  //  this.getCommand();
+  // }, 2000);
+
+  constructor(private mainServiceService: MainServiceService) { }
 
   ngOnInit() {
+
   }
 
   getCommand() {
