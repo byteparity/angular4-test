@@ -39,7 +39,7 @@
           <div class="card-block">
             <h4 class="card-title" translate>Status</h4>
             <div *ngIf="messageList?.length > 0">
-                <div class="alert alert-success" role="alert" *ngFor="let message of messageList">
+                <div class="alert" [ngClass]="{'alert-success': message[0].type === 'success', 'alert-warning': message[0].type === 'warning', 'alert-danger': message[0].type === 'error'}" role="alert" *ngFor="let message of messageList">
                     <strong translate>{{message[0].code}}</strong>, <span>{{message[0].details}}</span>
                 </div>
             </div>

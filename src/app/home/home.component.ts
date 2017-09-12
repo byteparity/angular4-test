@@ -37,8 +37,9 @@ export class HomeComponent implements OnInit {
         .subscribe((link: any) => {
           this.link = link
           this.setmessageList(link);
-
-        });
+        }, (error: any) => {
+          this.setmessageList(error);
+         });
       }
 
       if (this.command.payload.command === 'request_element') {
@@ -47,24 +48,30 @@ export class HomeComponent implements OnInit {
         .subscribe((element: any) => {
           this.element = element
           this.setmessageList(element);
-        });
+        }, (error: any) => {
+          this.setmessageList(error);
+         });
       }
 
       if (this.command.payload.command === 'request_command') {
         this.getCommand();
       }
+     }, (error: any) => {
+      this.setmessageList(error);
      });
   }
 
   setmessageList(_item: any) {
     if (_item.warnings.length !== 0) {
+      _item.warnings[0].type = 'warning';
       this.messageList.push(_item.warnings);
     }
     if (_item.errors.length !== 0) {
+      _item.errors[0].type = 'error';
       this.messageList.push(_item.errors);
     }
     if (_item.warnings.length === 0 && _item.errors.length === 0) {
-      this.messageList.push([{code: 'HAPPY_REQUEST', details: ''}]);
+      this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
     }
   }
 
