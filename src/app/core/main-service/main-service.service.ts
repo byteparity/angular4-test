@@ -84,6 +84,9 @@ export class MainServiceService {
     if (_res.status === 404) {
       this.toastr.error(_res.status.toString(), _res.statusText);
     }
+    if (_res.status === 500) {
+      this.toastr.error(_res.status.toString(), _res.statusText);
+    }
   }
 
 }

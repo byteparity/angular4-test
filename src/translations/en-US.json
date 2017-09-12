@@ -25,5 +25,12 @@
   "StatusReflector": "StatusReflector",
   "Status": "Status",
   "Go": "Go",
-  "Clear": "Clear"
+  "Clear": "Clear",
+  "Element": "Element",
+  "Elements": "Elements",
+  "Source": "Source",
+  "Destination": "Destination",
+  "element_already_exists": "element already exists",
+  "does_not_exists_in_elements": "does not exists in elements",
+  "connection_could_not_be_created": "connection could not be created"
 }

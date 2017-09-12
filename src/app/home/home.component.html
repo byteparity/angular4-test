@@ -8,7 +8,7 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-4">
+    <div class="col-2">
         <div class="card">
           <h3 class="card-header" translate>Action</h3>
           <div class="card-block">
@@ -22,14 +22,45 @@
           </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-6">
         <div class="card">
           <h3 class="card-header" translate>Executor</h3>
           <div class="card-block">
             <h4 class="card-title" translate>State area</h4>
-            <p class="card-text">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-            </p>
+            <div class="row">
+              <div class="col-4">
+                  <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th translate>Elements</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="elementIdList?.length > 0">
+                        <tr *ngFor="let elementId of elementIdList">
+                          <td>{{elementId}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="col-8">
+                  <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th translate>Action</th>
+                          <th translate>Source</th>
+                          <th translate>Destination</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="linkItemList?.length > 0">
+                        <tr *ngFor="let linkItem of linkItemList">
+                          <td>{{linkItem.action}}</td>
+                          <td>{{linkItem.dst}}</td>
+                          <td>{{linkItem.src}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
           </div>
         </div>
     </div>
@@ -40,7 +71,7 @@
             <h4 class="card-title" translate>Status</h4>
             <div *ngIf="messageList?.length > 0">
                 <div class="alert" [ngClass]="{'alert-success': message[0].type === 'success', 'alert-warning': message[0].type === 'warning', 'alert-danger': message[0].type === 'error'}" role="alert" *ngFor="let message of messageList">
-                    <strong translate>{{message[0].code}}</strong>, <span>{{message[0].details}}</span>
+                    <strong translate>{{message[0].code}}</strong>, <span translate>{{message[0].details}}</span>
                 </div>
             </div>
           </div>
