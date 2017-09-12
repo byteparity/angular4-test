@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
         return true;
       } else {
         this.linkItemList.push(_payload);
-        this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
+        this.messageList.push([{code: tempItem.toString(), details: 'connection_created', type: 'success'}]);
       }
     } else if (_payload.action === 'unbind') {
       if (_.intersectionWith(this.linkItemList, [_payload.action], _.isEqual).length !== 1) {
@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
       } else {
         _payload.action = 'bind';
         _.pullAllBy(this.linkItemList, [_payload], 'action');
-        this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
+        this.messageList.push([{code: tempItem.toString(), details: 'connection_removed', type: 'success'}]);
       }
     }
     return true;
