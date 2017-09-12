@@ -83,13 +83,13 @@ export class HomeComponent implements OnInit {
             return true;
           } else {
             this.elementIdList.push(_item.payload.id);
+            this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
           }
         }
 
         if (_item.payload.action !== undefined) {
           this.takeAction(_item.payload);
         }
-        this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
       }
     }
   }
@@ -99,7 +99,6 @@ export class HomeComponent implements OnInit {
     tempItem.shift();
 
     if (_payload.action === 'bind') {
-      debugger;
       if (_.intersection(this.elementIdList, tempItem).length !== 2) {
         this.messageList.push([
           {
@@ -111,17 +110,23 @@ export class HomeComponent implements OnInit {
         return true;
       } else {
         this.linkItemList.push(_payload);
+        this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
       }
     } else if (_payload.action === 'unbind') {
-      debugger;
-      this.messageList.push([
-        {
-          code: tempItem.toString() + ' does not exist in connections',
-          details: 'does_not_exists_in_elements',
-          type: 'warning'
-        }
-      ]);
-      return true;
+      if (_.intersectionWith(this.linkItemList, [_payload.action], _.isEqual).length !== 1) {
+        this.messageList.push([
+          {
+            code: tempItem.toString() + ' does not exist in connections',
+            details: 'connection_could_not_be_removed',
+            type: 'warning'
+          }
+        ]);
+        return true;
+      } else {
+        _payload.action = 'bind';
+        _.pullAllBy(this.linkItemList, [_payload], 'action');
+        this.messageList.push([{code: 'HAPPY_REQUEST', details: '', type: 'success'}]);
+      }
     }
     return true;
   }
