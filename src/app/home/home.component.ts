@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCommand() {
+    // TODO : Need to check/improve condtional code
     this.isLoading = true;
     this.messageList = [];
     this.mainServiceService.getCommand()
@@ -102,7 +103,7 @@ export class HomeComponent implements OnInit {
       if (_.intersection(this.elementIdList, tempItem).length !== 2) {
         this.messageList.push([
           {
-            code: tempItem.toString() + ' does not exist in elements',
+            code: tempItem.toString() + ' does not exist in elements', // TODO : Add in lang file
             details: 'connection_could_not_be_created',
             type: 'warning'
           }
@@ -116,7 +117,7 @@ export class HomeComponent implements OnInit {
       if (_.intersectionWith(this.linkItemList, [_payload.action], _.isEqual).length !== 1) {
         this.messageList.push([
           {
-            code: tempItem.toString() + ' does not exist in connections',
+            code: tempItem.toString() + ' does not exist in connections', // TODO : Add in lang file
             details: 'connection_could_not_be_removed',
             type: 'warning'
           }
