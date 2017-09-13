@@ -120,7 +120,8 @@ export class HomeComponent implements OnInit {
         this.messageList.push([{code: tempItem.toString(), details: 'connection_created', type: 'success'}]);
       }
     } else if (_payload.action === 'unbind') {
-      if (_.intersectionWith(this.linkItemList, [_payload.action], _.isEqual).length !== 1) {
+      _payload.action = 'bind';
+      if (_.intersectionWith(this.linkItemList, [_payload], _.isEqual).length !== 1) {
         this.messageList.push([
           {
             code: tempItem.toString() + ' does not exist in connections', // TODO : Add in lang file
@@ -130,7 +131,6 @@ export class HomeComponent implements OnInit {
         ]);
         return true;
       } else {
-        _payload.action = 'bind';
         _.pullAllBy(this.linkItemList, [_payload], 'action');
         this.messageList.push([{code: tempItem.toString(), details: 'connection_removed', type: 'success'}]);
       }
